@@ -22,6 +22,7 @@
 
             <Button
                 android:id="@+id/buttonClear"
+                android:onClick="buttonClear_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -29,6 +30,7 @@
 
             <Button
                 android:id="@+id/buttonDelete"
+                android:onClick="buttonDelete_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -36,13 +38,15 @@
 
             <Button
                 android:id="@+id/buttonChangeSign"
+                android:onClick="buttonChangeSign_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="+-" />
 
             <Button
-                android:id="@+id/button18"
+                android:id="@+id/buttonDivide"
+                android:onClick="buttonDivide_OnClick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/" />
@@ -55,25 +59,29 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button15"
+                android:id="@+id/buttonNine"
+                android:onClick="buttonNine_OnClick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9" />
 
             <Button
-                android:id="@+id/button16"
+                android:id="@+id/buttonEight"
+                android:onClick="buttonEight_OnClick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8" />
 
             <Button
-                android:id="@+id/button17"
+                android:id="@+id/buttonSeven"
+                android:onClick="buttonSeven_OnClick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7" />
 
             <Button
-                android:id="@+id/buttonSeven"
+                android:id="@+id/buttonMultiply"
+                android:onClick="buttonMultiply_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -88,6 +96,7 @@
 
             <Button
                 android:id="@+id/buttonSix"
+                android:onClick="buttonSix_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -95,6 +104,7 @@
 
             <Button
                 android:id="@+id/buttonFive"
+                android:onClick="buttonFive_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -102,6 +112,7 @@
 
             <Button
                 android:id="@+id/buttonFour"
+                android:onClick="buttonFour_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -109,6 +120,7 @@
 
             <Button
                 android:id="@+id/buttonSubstract"
+                android:onClick="buttonSubstract_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -122,6 +134,7 @@
 
             <Button
                 android:id="@+id/buttonThree"
+                android:onClick="buttonThree_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -129,6 +142,7 @@
 
             <Button
                 android:id="@+id/buttonTwo"
+                android:onClick="buttonTwo_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -136,6 +150,7 @@
 
             <Button
                 android:id="@+id/buttonOne"
+                android:onClick="buttonOne_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -143,6 +158,7 @@
 
             <Button
                 android:id="@+id/buttonSum"
+                android:onClick="buttonSum_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -155,13 +171,15 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button21"
+                android:id="@+id/buttonZero"
+                android:onClick="buttonZero_OnClick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0" />
 
             <Button
                 android:id="@+id/buttonEquals"
+                android:onClick="buttonEquals_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
