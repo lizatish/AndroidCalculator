@@ -1,5 +1,7 @@
 package com.tishkovets.lab3;
 
+import androidx.annotation.NonNull;
+
 import com.tishkovets.lab3.commands.Action;
 import com.tishkovets.lab3.commands.CommandType;
 import com.tishkovets.lab3.commands.Digit;
@@ -145,7 +147,7 @@ public class IntegerCalculator {
         StringBuilder current_number = new StringBuilder();
 
         for (CommandType elem : this.calculations) {
-            if (elem.getWeight() == 0) {
+            if (elem instanceof Digit) {
                 current_number.append(elem.toString());
             } else {
                 if (!current_number.toString().equals("")) {
@@ -161,6 +163,7 @@ public class IntegerCalculator {
         return result;
     }
 
+    @NonNull
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
