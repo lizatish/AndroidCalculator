@@ -1,11 +1,7 @@
-package com.tishkovets.lab3;
+package com.tishkovets.lab3.commands;
 
+public enum Digit implements CommandType {
 
-public enum Command {
-    DIVISION('/'),
-    MULTIPLY('*'),
-    SUBTRACT('-'),
-    ADDITION('+'),
     ZERO('0'),
     ONE('1'),
     TWO('2'),
@@ -19,7 +15,7 @@ public enum Command {
 
     private final char symbol;
 
-    Command(char symbol) {
+    Digit(char symbol) {
         this.symbol = symbol;
     }
 

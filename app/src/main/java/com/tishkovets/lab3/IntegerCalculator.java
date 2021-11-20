@@ -1,10 +1,13 @@
 package com.tishkovets.lab3;
 
+import com.tishkovets.lab3.commands.Action;
+import com.tishkovets.lab3.commands.CommandType;
+
 import java.util.Deque;
 import java.util.LinkedList;
 
 public class IntegerCalculator {
-    private final Deque<Command> calculations;
+    private final Deque<CommandType> calculations;
     private final boolean islastDigit = false;
     private final String lastDigit = "";
 
@@ -26,8 +29,14 @@ public class IntegerCalculator {
 //        this.calculations.addLast(value);
 //    }
 //
-    public void add_command(Command command) {
-        this.calculations.addLast(command);
+    public void add_command(CommandType command) {
+        if (command instanceof Action && this.calculations.size() != 0
+                && this.calculations.getLast() instanceof Action) {
+            this.calculations.removeLast();
+            this.calculations.addLast(command);
+        } else if (!(command instanceof Action && this.calculations.size() == 0)) {
+            this.calculations.addLast(command);
+        }
     }
 
     public void remove_last_command() {
@@ -51,7 +60,7 @@ public class IntegerCalculator {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (Command elem : this.calculations) {
+        for (CommandType elem : this.calculations) {
             result.append(elem.toString());
         }
         return result.toString();
