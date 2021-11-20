@@ -2,11 +2,15 @@ package com.tishkovets.lab3;
 
 import com.tishkovets.lab3.commands.Action;
 import com.tishkovets.lab3.commands.CommandType;
+import com.tishkovets.lab3.commands.Digit;
 
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+
+// todo добавить обработку деления на ноль
+// todo добавить смену знака
 
 public class IntegerCalculator {
     private final Deque<CommandType> calculations;
@@ -93,34 +97,47 @@ public class IntegerCalculator {
         return result;
     }
 
-    public int calculate() {
+    public void calculate() {
 
         if (calculations.getLast() instanceof Action) {
             calculations.removeLast();
         }
-        List<String> result = this.convertDigitCommandsToFullDigits();
+        List<String> tempList = this.convertDigitCommandsToFullDigits();
+        int numberOfMultiplyOrDivision = getNumberOfMultiplyAndDivision(tempList);
 
-        int numberOfMultiplyOrDivision = getNumberOfMultiplyAndDivision(result);
-
-        int x = 0;
+        int index = 0;
         while (numberOfMultiplyOrDivision != 0) {
-            if (equalCalculationMultiplyOrDivision(x, result)) {
+            if (equalCalculationMultiplyOrDivision(index, tempList)) {
                 numberOfMultiplyOrDivision -= 1;
-                x -= 1;
+                index -= 1;
             } else {
-                x += 1;
+                index += 1;
             }
         }
 
-        x = 0;
-        while (result.size() != 1) {
-            if (equalCalculationSubtractAndAddition(x, result)) {
-                x -= 1;
+        index = 0;
+        while (tempList.size() != 1) {
+            if (equalCalculationSubtractAndAddition(index, tempList)) {
+                index -= 1;
             } else {
-                x += 1;
+                index += 1;
             }
         }
-        return Integer.parseInt(result.get(0));
+
+        this.updateStack(tempList.get(0));
+    }
+
+    private void updateStack(String answer) {
+        String[] stringResult = answer.split("");
+        this.clear_all();
+        for (String str : stringResult) {
+            for (Digit digit : Digit.values()) {
+                if (digit.toString().equals(str)) {
+                    this.calculations.addLast(digit);
+                    break;
+                }
+            }
+        }
     }
 
     private LinkedList<String> convertDigitCommandsToFullDigits() {

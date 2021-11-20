@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonEquals_OnClick(View view) {
-        int result = calculator.calculate();
-        this.outputText.setText(String.valueOf(result));
+        calculator.calculate();
+        this.outputText.setText(calculator.toString());
     }
 
     public void buttonNine_OnClick(View view) {
