@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.tishkovets.lab3.commands.Action;
-import com.tishkovets.lab3.commands.Digit;
+import com.tishkovets.lab3.commands.Operator;
+import com.tishkovets.lab3.commands.SimpleOperand;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,37 +27,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonClear_OnClick(View view) {
-        calculator.clear_all();
+        calculator.clearAll();
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonDelete_OnClick(View view) {
-        calculator.remove_last_command();
+        calculator.removeLastCommand();
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonSum_OnClick(View view) {
-        calculator.add_command(Action.ADDITION);
+        calculator.addCommand(Operator.ADDITION);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonChangeSign_OnClick(View view) {
-        calculator.change_sign();
+        calculator.changeSign();
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonDivide_OnClick(View view) {
-        calculator.add_command(Action.DIVISION);
+        calculator.addCommand(Operator.DIVISION);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonMultiply_OnClick(View view) {
-        calculator.add_command(Action.MULTIPLY);
+        calculator.addCommand(Operator.MULTIPLY);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonSubstract_OnClick(View view) {
-        calculator.add_command(Action.SUBTRACT);
+        calculator.addCommand(Operator.SUBTRACT);
         this.outputText.setText(calculator.toString());
     }
 
@@ -67,52 +67,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonNine_OnClick(View view) {
-        calculator.add_command(Digit.NINE);
+        calculator.addCommand(SimpleOperand.NINE);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonEight_OnClick(View view) {
-        calculator.add_command(Digit.EIGHT);
+        calculator.addCommand(SimpleOperand.EIGHT);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonSeven_OnClick(View view) {
-        calculator.add_command(Digit.SEVEN);
+        calculator.addCommand(SimpleOperand.SEVEN);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonSix_OnClick(View view) {
-        calculator.add_command(Digit.SIX);
+        calculator.addCommand(SimpleOperand.SIX);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonFive_OnClick(View view) {
-        calculator.add_command(Digit.FIVE);
+        calculator.addCommand(SimpleOperand.FIVE);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonFour_OnClick(View view) {
-        calculator.add_command(Digit.FOUR);
+        calculator.addCommand(SimpleOperand.FOUR);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonThree_OnClick(View view) {
-        calculator.add_command(Digit.THREE);
+        calculator.addCommand(SimpleOperand.THREE);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonTwo_OnClick(View view) {
-        calculator.add_command(Digit.TWO);
+        calculator.addCommand(SimpleOperand.TWO);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonOne_OnClick(View view) {
-        calculator.add_command(Digit.ONE);
+        calculator.addCommand(SimpleOperand.ONE);
         this.outputText.setText(calculator.toString());
     }
 
     public void buttonZero_OnClick(View view) {
-        calculator.add_command(Digit.ZERO);
+        calculator.addCommand(SimpleOperand.ZERO);
         this.outputText.setText(calculator.toString());
     }
 }

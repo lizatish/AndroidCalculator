@@ -2,7 +2,7 @@ package com.tishkovets.lab3.commands;
 
 import androidx.annotation.NonNull;
 
-public enum Digit implements CommandType {
+public enum SimpleOperand implements CommandType {
 
     ZERO("0", 0),
     ONE("1", 0),
@@ -18,7 +18,7 @@ public enum Digit implements CommandType {
     private final String symbol;
     private final int weight;
 
-    Digit(String symbol, int weight) {
+    SimpleOperand(String symbol, int weight) {
         this.symbol = symbol;
         this.weight = weight;
     }

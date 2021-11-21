@@ -2,12 +2,12 @@ package com.tishkovets.lab3.commands;
 
 import androidx.annotation.NonNull;
 
-public class FullDigit implements CommandType {
+public class FullOperand implements CommandType {
 
     private int value;
     private final int weight = 0;
 
-    public FullDigit(int value) {
+    public FullOperand(int value) {
         this.value = value;
     }
 

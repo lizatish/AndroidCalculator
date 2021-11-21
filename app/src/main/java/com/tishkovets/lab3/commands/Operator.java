@@ -3,7 +3,7 @@ package com.tishkovets.lab3.commands;
 
 import androidx.annotation.NonNull;
 
-public enum Action implements CommandType {
+public enum Operator implements CommandType {
     DIVISION("/", 2) {
         @Override
         public int calculate(int left, int right) {
@@ -32,7 +32,7 @@ public enum Action implements CommandType {
     private final String symbol;
     private final int weight;
 
-    Action(String symbol, int weight) {
+    Operator(String symbol, int weight) {
         this.symbol = symbol;
         this.weight = weight;
     }
