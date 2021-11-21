@@ -1,18 +1,50 @@
 package com.tishkovets.lab3.commands;
 
 
+import androidx.annotation.NonNull;
+
 public enum Action implements CommandType {
-    DIVISION('/'),
-    MULTIPLY('*'),
-    SUBTRACT('-'),
-    ADDITION('+');
+    DIVISION("/", 2) {
+        @Override
+        public int calculate(int left, int right) {
+            return left / right;
+        }
+    },
+    MULTIPLY("*", 2) {
+        @Override
+        public int calculate(int left, int right) {
+            return left * right;
+        }
+    },
+    SUBTRACT("-", 1) {
+        @Override
+        public int calculate(int left, int right) {
+            return left - right;
+        }
+    },
+    ADDITION("+", 1) {
+        @Override
+        public int calculate(int left, int right) {
+            return left + right;
+        }
+    };
 
-    private final char symbol;
+    private final String symbol;
+    private final int weight;
 
-    Action(char symbol) {
+    Action(String symbol, int weight) {
         this.symbol = symbol;
+        this.weight = weight;
     }
 
+    public abstract int calculate(int left, int right);
+
+    @Override
+    public int getWeight() {
+        return this.weight;
+    }
+
+    @NonNull
     @Override
     public String toString() {
         return String.valueOf(this.symbol);

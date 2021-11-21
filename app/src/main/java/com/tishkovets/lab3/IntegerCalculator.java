@@ -5,14 +5,15 @@ import androidx.annotation.NonNull;
 import com.tishkovets.lab3.commands.Action;
 import com.tishkovets.lab3.commands.CommandType;
 import com.tishkovets.lab3.commands.Digit;
+import com.tishkovets.lab3.commands.FullDigit;
 
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
 // todo добавить обработку деления на ноль
 // todo добавить смену знака
+// todo добавить начало с минуса
 
 public class IntegerCalculator {
     private final Deque<CommandType> calculations;
@@ -22,9 +23,12 @@ public class IntegerCalculator {
     }
 
     public void add_command(CommandType command) {
+        //TODO вынести в метод
         if (command instanceof Action && this.calculations.size() != 0
                 && this.calculations.getLast() instanceof Action) {
             this.calculations.removeLast();
+            this.calculations.addLast(command);
+        } else if (Action.SUBTRACT.equals(command) && this.calculations.size() == 0) {
             this.calculations.addLast(command);
         } else if (!(command instanceof Action && this.calculations.size() == 0)) {
             this.calculations.addLast(command);
@@ -42,91 +46,62 @@ public class IntegerCalculator {
     }
 
     public void change_sign() {
-
-    }
-
-    private int getNumberOfMultiplyAndDivision(List<String> arr) {
-        int number = 0;
-        for (String elem : arr) {
-            if (elem.equals(Action.MULTIPLY.toString()) || elem.equals(Action.DIVISION.toString())) {
-                number += 1;
-            }
+        for (int i = this.calculations.size() - 1; i >= 0; i--) {
         }
-        return number;
+
     }
 
-    private List<Integer> getPreviousAndPastElements(int index, List<String> arr) {
-        Integer prev = Integer.valueOf(arr.get(index - 1));
-        Integer past = Integer.valueOf(arr.get(index + 1));
-        return Arrays.asList(prev, past);
-    }
-
-    private void removePrevPastCurrentElements(int index, List<String> arr) {
+    private void removePrevPastCurrentElements(int index, List<CommandType> arr) {
         arr.remove(index + 1);
         arr.remove(index);
         arr.remove(index - 1);
     }
 
-    private boolean equalCalculationMultiplyOrDivision(int index, List<String> arr) {
+    private boolean executeActionsWithWeight(List<CommandType> arr, int index, int weight) {
+
         boolean result = false;
-        if (arr.get(index).equals(Action.MULTIPLY.toString())) {
-            List<Integer> prevPastValues = getPreviousAndPastElements(index, arr);
+        CommandType element = arr.get(index);
+        if (element.getWeight() == weight && element instanceof Action) {
+            int prev = Integer.parseInt(arr.get(index - 1).toString());
+            int past = Integer.parseInt(arr.get(index + 1).toString());
             removePrevPastCurrentElements(index, arr);
-            arr.add(index - 1, Integer.toString(prevPastValues.get(0) * prevPastValues.get(1)));
-            result = true;
-        } else if (arr.get(index).equals(Action.DIVISION.toString())) {
-            List<Integer> prevPastValues = getPreviousAndPastElements(index, arr);
-            removePrevPastCurrentElements(index, arr);
-            arr.add(index - 1, Integer.toString(prevPastValues.get(0) / prevPastValues.get(1)));
+            arr.add(index - 1, new FullDigit(((Action) element).calculate(prev, past)));
             result = true;
         }
         return result;
     }
 
-    private boolean equalCalculationSubtractAndAddition(int index, List<String> arr) {
-        boolean result = false;
-        if (arr.get(index).equals(Action.SUBTRACT.toString())) {
-            List<Integer> prevPastValues = getPreviousAndPastElements(index, arr);
-            removePrevPastCurrentElements(index, arr);
-            arr.add(index - 1, Integer.toString(prevPastValues.get(0) - prevPastValues.get(1)));
-            result = true;
-        } else if (arr.get(index).equals(Action.ADDITION.toString())) {
-            List<Integer> prevPastValues = getPreviousAndPastElements(index, arr);
-            removePrevPastCurrentElements(index, arr);
-            arr.add(index - 1, Integer.toString(prevPastValues.get(0) + prevPastValues.get(1)));
-            result = true;
+    private int getMaxWeight(List<CommandType> arr) {
+        int maxWeight = 0;
+        for (CommandType elem : arr) {
+            int currentWeight = elem.getWeight();
+            if (currentWeight > maxWeight) {
+                maxWeight = currentWeight;
+            }
         }
-        return result;
+        return maxWeight;
     }
 
     public void calculate() {
-
+        //todo вынести в метод removeLastAction
         if (calculations.getLast() instanceof Action) {
             calculations.removeLast();
         }
-        List<String> tempList = this.convertDigitCommandsToFullDigits();
-        int numberOfMultiplyOrDivision = getNumberOfMultiplyAndDivision(tempList);
+        List<CommandType> tempList = this.convertDigitCommandsToFullDigits();
 
-        int index = 0;
-        while (numberOfMultiplyOrDivision != 0) {
-            if (equalCalculationMultiplyOrDivision(index, tempList)) {
-                numberOfMultiplyOrDivision -= 1;
-                index -= 1;
-            } else {
-                index += 1;
+        int weight = this.getMaxWeight(tempList);
+        while (weight != 0) {
+            int index = 0;
+            while (index <= tempList.size() - 1) {
+                if (this.executeActionsWithWeight(tempList, index, weight)) {
+                    index -= 1;
+                } else {
+                    index += 1;
+                }
+                weight = this.getMaxWeight(tempList);
             }
         }
-
-        index = 0;
-        while (tempList.size() != 1) {
-            if (equalCalculationSubtractAndAddition(index, tempList)) {
-                index -= 1;
-            } else {
-                index += 1;
-            }
-        }
-
-        this.updateStack(tempList.get(0));
+        this.updateStack(tempList.get(0).toString());
     }
 
     private void updateStack(String answer) {
@@ -142,8 +117,9 @@ public class IntegerCalculator {
         }
     }
 
-    private LinkedList<String> convertDigitCommandsToFullDigits() {
-        LinkedList<String> result = new LinkedList<>();
+    private LinkedList<CommandType> convertDigitCommandsToFullDigits() {
+        LinkedList<CommandType> result = new LinkedList<>();
+
         StringBuilder current_number = new StringBuilder();
 
         for (CommandType elem : this.calculations) {
@@ -151,14 +127,14 @@ public class IntegerCalculator {
                 current_number.append(elem.toString());
             } else {
                 if (!current_number.toString().equals("")) {
-                    result.add(current_number.toString());
+                    result.add(new FullDigit(Integer.parseInt(current_number.toString())));
                     current_number = new StringBuilder();
                 }
-                result.add(elem.toString());
+                result.add(elem);
             }
         }
         if (!current_number.toString().equals("")) {
-            result.add(current_number.toString());
+            result.add(new FullDigit(Integer.parseInt(current_number.toString())));
         }
         return result;
     }
