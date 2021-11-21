@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final IntegerCalculator calculator;
     private TextView outputText;
+    private TextView errorText;
 
     public MainActivity() {
         this.calculator = new IntegerCalculator();
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.outputText = findViewById(R.id.resultText);
+        this.errorText = findViewById(R.id.errorText);
     }
 
     public void buttonClear_OnClick(View view) {
@@ -62,7 +64,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonEquals_OnClick(View view) {
-        calculator.calculate();
+        try {
+            calculator.calculate();
+            this.errorText.setHint("");
+        } catch (IllegalArgumentException error) {
+            this.errorText.setHint(error.getMessage());
+        }
         this.outputText.setText(calculator.toString());
     }
 

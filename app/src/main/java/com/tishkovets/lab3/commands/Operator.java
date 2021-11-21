@@ -7,6 +7,9 @@ public enum Operator implements CommandType {
     DIVISION("/", 2) {
         @Override
         public int calculate(int left, int right) {
+            if (right == 0) {
+                throw new IllegalArgumentException("На ноль делить нельзя");
+            }
             return left / right;
         }
     },

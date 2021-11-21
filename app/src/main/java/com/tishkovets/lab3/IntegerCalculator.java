@@ -34,8 +34,7 @@ public class IntegerCalculator {
     }
     
     public void removeLastCommand() {
-        if (this.
-                calculations.size() != 0) {
+        if (this.calculations.size() != 0) {
             this.calculations.removeLast();
         }
     }
