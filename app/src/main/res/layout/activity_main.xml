@@ -63,14 +63,15 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonDelete_OnClick"
                     android:text="DEL" />
 
                 <Button
                     android:id="@+id/buttonChangeSign"
-                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonChangeSign_OnClick"
                     android:text="+-" />
 
@@ -94,6 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonEight_OnClick"
                     android:text="8" />
 
@@ -102,6 +104,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonSeven_OnClick"
                     android:text="7" />
 
@@ -125,6 +128,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonFive_OnClick"
                     android:text="5" />
 
@@ -133,6 +137,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonFour_OnClick"
                     android:text="4" />
 
@@ -156,6 +161,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonTwo_OnClick"
                     android:text="2" />
 
@@ -164,6 +170,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonOne_OnClick"
                     android:text="1" />
 
@@ -176,7 +183,7 @@
 
                 <Button
                     android:id="@+id/buttonZero"
-                    android:layout_width="wrap_content"
+                    android:layout_width="99dp"
                     android:layout_height="match_parent"
                     android:layout_span="1"
                     android:onClick="buttonZero_OnClick"
@@ -187,6 +194,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
                     android:onClick="buttonEquals_OnClick"
                     android:text="=" />
 
@@ -204,14 +212,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:insetLeft="5dp"
                 android:onClick="buttonDivide_OnClick"
                 android:text="/" />
 
             <Button
                 android:id="@+id/buttonMultiply"
-                android:layout_width="98dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:insetLeft="5dp"
+                android:insetRight="0dp"
                 android:onClick="buttonMultiply_OnClick"
                 android:text="*" />
 
@@ -220,6 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:insetLeft="5dp"
                 android:onClick="buttonSubstract_OnClick"
                 android:text="-" />
 
@@ -228,6 +240,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:insetLeft="5dp"
                 android:onClick="buttonSum_OnClick"
                 android:text="+" />
         </LinearLayout>
