@@ -11,7 +11,6 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-// todo добавить обработку деления на ноль
 // todo добавить смену знака
 // todo добавить начало с минуса
 
@@ -32,7 +31,7 @@ public class IntegerCalculator {
             this.calculations.addLast(command);
         }
     }
-    
+
     public void removeLastCommand() {
         if (this.calculations.size() != 0) {
             this.calculations.removeLast();
@@ -54,7 +53,7 @@ public class IntegerCalculator {
         if (calculations.getLast() instanceof Operator) {
             calculations.removeLast();
         }
-        List<CommandType> tempList = this.convertDigitCommandsToFullDigits();
+        List<CommandType> tempList = this.convertSimpleOperandsToFullOperands();
 
         int weight = this.getMaxWeight(tempList);
         while (weight != 0) {
@@ -68,12 +67,21 @@ public class IntegerCalculator {
                 weight = this.getMaxWeight(tempList);
             }
         }
-        this.updateStack(tempList.get(0).toString());
+        this.updateStack(tempList.get(0));
     }
 
-    private void updateStack(String answer) {
-        String[] stringResult = answer.split("");
+    private void updateStack(CommandType answer) {
         this.clearAll();
+
+        String stringAnalog = answer.toString();
+        int integerAnalog = Integer.parseInt(stringAnalog);
+
+        if (integerAnalog < 0) {
+            this.calculations.addLast(Operator.SUBTRACT);
+            stringAnalog = String.valueOf(Math.abs(integerAnalog));
+        }
+
+        String[] stringResult = stringAnalog.split("");
         for (String str : stringResult) {
             for (SimpleOperand digit : SimpleOperand.values()) {
                 if (digit.toString().equals(str)) {
@@ -84,13 +92,13 @@ public class IntegerCalculator {
         }
     }
 
-    private LinkedList<CommandType> convertDigitCommandsToFullDigits() {
+    private LinkedList<CommandType> convertSimpleOperandsToFullOperands() {
         LinkedList<CommandType> result = new LinkedList<>();
 
         StringBuilder current_number = new StringBuilder();
 
         for (CommandType elem : this.calculations) {
-            if (elem instanceof SimpleOperand) {
+            if (elem instanceof SimpleOperand || (Operator.SUBTRACT.equals(elem) && current_number.length() == 0)) {
                 current_number.append(elem.toString());
             } else {
                 if (!current_number.toString().equals("")) {
