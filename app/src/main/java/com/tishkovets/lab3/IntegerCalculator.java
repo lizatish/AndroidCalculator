@@ -11,9 +11,6 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-// todo добавить смену знака
-// todo добавить начало с минуса
-
 public class IntegerCalculator {
     private final Deque<CommandType> calculations;
 
@@ -43,16 +40,42 @@ public class IntegerCalculator {
     }
 
     public void changeSign() {
-        for (int i = this.calculations.size() - 1; i >= 0; i--) {
+        List<CommandType> lastSimpleOperands = new LinkedList<>();
+        int index = this.calculations.size() - 1;
+        while (index >= 0) {
+            CommandType currentCommand = this.calculations.getLast();
+            if (currentCommand instanceof SimpleOperand) {
+                lastSimpleOperands.add(currentCommand);
+                this.calculations.removeLast();
+            } else if (Operator.ADDITION.equals(currentCommand)) {
+                this.calculations.removeLast();
+                this.calculations.addLast(Operator.SUBTRACT);
+                this.addCalculationsFromList(lastSimpleOperands);
+                break;
+            } else if (Operator.SUBTRACT.equals(currentCommand)) {
+                this.calculations.removeLast();
+                if (index != 0 && !(this.calculations.getLast() instanceof Operator)) {
+                    this.calculations.addLast(Operator.ADDITION);
+                }
+                this.addCalculationsFromList(lastSimpleOperands);
+                break;
+            } else {
+                this.calculations.addLast(Operator.SUBTRACT);
+                this.addCalculationsFromList(lastSimpleOperands);
+                break;
+            }
+            index -= 1;
         }
 
+        if (this.calculations.size() == 0) {
+            this.calculations.addLast(Operator.SUBTRACT);
+            this.addCalculationsFromList(lastSimpleOperands);
+        }
     }
 
     public void calculate() {
-        //todo вынести в метод removeLastAction
-        if (calculations.getLast() instanceof Operator) {
-            calculations.removeLast();
-        }
+        this.removeLastOperatorIfExists();
+
         List<CommandType> tempList = this.convertSimpleOperandsToFullOperands();
 
         int weight = this.getMaxWeight(tempList);
@@ -89,6 +112,12 @@ public class IntegerCalculator {
                     break;
                 }
             }
+        }
+    }
+
+    private void removeLastOperatorIfExists() {
+        if (calculations.getLast() instanceof Operator) {
+            calculations.removeLast();
         }
     }
 
@@ -156,6 +185,12 @@ public class IntegerCalculator {
     private boolean isLastOperator(CommandType command) {
         return command instanceof Operator && this.calculations.size() != 0
                 && this.calculations.getLast() instanceof Operator;
+    }
+
+    private void addCalculationsFromList(List<CommandType> lastSimpleOperands) {
+        for (CommandType elem : lastSimpleOperands) {
+            this.calculations.addLast(elem);
+        }
     }
 
     @NonNull
