@@ -11,8 +11,8 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginTop="200dp"
-        android:layout_marginEnd="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
@@ -22,33 +22,34 @@
 
             <Button
                 android:id="@+id/buttonClear"
-                android:onClick="buttonClear_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonClear_OnClick"
                 android:text="CLR" />
 
             <Button
                 android:id="@+id/buttonDelete"
-                android:onClick="buttonDelete_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonDelete_OnClick"
                 android:text="DEL" />
 
             <Button
                 android:id="@+id/buttonChangeSign"
-                android:onClick="buttonChangeSign_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonChangeSign_OnClick"
                 android:text="+-" />
 
             <Button
                 android:id="@+id/buttonDivide"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:onClick="buttonDivide_OnClick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="/" />
 
         </TableRow>
@@ -60,31 +61,34 @@
 
             <Button
                 android:id="@+id/buttonNine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:onClick="buttonNine_OnClick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="9" />
 
             <Button
                 android:id="@+id/buttonEight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:onClick="buttonEight_OnClick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="8" />
 
             <Button
                 android:id="@+id/buttonSeven"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:onClick="buttonSeven_OnClick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="7" />
 
             <Button
                 android:id="@+id/buttonMultiply"
-                android:onClick="buttonMultiply_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonMultiply_OnClick"
                 android:text="*" />
 
         </TableRow>
@@ -96,34 +100,34 @@
 
             <Button
                 android:id="@+id/buttonSix"
-                android:onClick="buttonSix_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonSix_OnClick"
                 android:text="6" />
 
             <Button
                 android:id="@+id/buttonFive"
-                android:onClick="buttonFive_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonFive_OnClick"
                 android:text="5" />
 
             <Button
                 android:id="@+id/buttonFour"
-                android:onClick="buttonFour_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonFour_OnClick"
                 android:text="4" />
 
             <Button
                 android:id="@+id/buttonSubstract"
-                android:onClick="buttonSubstract_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonSubstract_OnClick"
                 android:text="-" />
         </TableRow>
 
@@ -134,34 +138,34 @@
 
             <Button
                 android:id="@+id/buttonThree"
-                android:onClick="buttonThree_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonThree_OnClick"
                 android:text="3" />
 
             <Button
                 android:id="@+id/buttonTwo"
-                android:onClick="buttonTwo_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonTwo_OnClick"
                 android:text="2" />
 
             <Button
                 android:id="@+id/buttonOne"
-                android:onClick="buttonOne_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonOne_OnClick"
                 android:text="1" />
 
             <Button
                 android:id="@+id/buttonSum"
-                android:onClick="buttonSum_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonSum_OnClick"
                 android:text="+" />
         </TableRow>
 
@@ -172,17 +176,17 @@
 
             <Button
                 android:id="@+id/buttonZero"
+                android:layout_span="1"
+                android:layout_height="match_parent"
                 android:onClick="buttonZero_OnClick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="0" />
 
             <Button
                 android:id="@+id/buttonEquals"
-                android:onClick="buttonEquals_OnClick"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="buttonEquals_OnClick"
                 android:text="=" />
 
         </TableRow>
