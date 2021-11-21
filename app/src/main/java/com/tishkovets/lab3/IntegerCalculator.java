@@ -40,12 +40,12 @@ public class IntegerCalculator {
     }
 
     public void changeSign() {
-        List<CommandType> lastSimpleOperands = new LinkedList<>();
+        Deque<CommandType> lastSimpleOperands = new LinkedList<>();
         int index = this.calculations.size() - 1;
         while (index >= 0) {
             CommandType currentCommand = this.calculations.getLast();
             if (currentCommand instanceof SimpleOperand) {
-                lastSimpleOperands.add(currentCommand);
+                lastSimpleOperands.addFirst(currentCommand);
                 this.calculations.removeLast();
             } else if (Operator.ADDITION.equals(currentCommand)) {
                 this.calculations.removeLast();
@@ -187,7 +187,7 @@ public class IntegerCalculator {
                 && this.calculations.getLast() instanceof Operator;
     }
 
-    private void addCalculationsFromList(List<CommandType> lastSimpleOperands) {
+    private void addCalculationsFromList(Deque<CommandType> lastSimpleOperands) {
         for (CommandType elem : lastSimpleOperands) {
             this.calculations.addLast(elem);
         }
