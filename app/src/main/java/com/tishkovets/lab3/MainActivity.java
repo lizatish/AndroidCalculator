@@ -12,6 +12,7 @@ import com.tishkovets.lab3.commands.HandleOperator;
 import com.tishkovets.lab3.commands.Operator;
 import com.tishkovets.lab3.commands.SimpleOperand;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,26 +28,17 @@ public class MainActivity extends AppCompatActivity {
         this.calculator = new IntegerCalculator();
         this.commandTypeMap = new HashMap<>();
 
-        commandTypeMap.put("buttonClear", HandleOperator.CLEAR);
-        commandTypeMap.put("buttonDelete", HandleOperator.DELETE);
-        commandTypeMap.put("buttonChangeSign", HandleOperator.CHANGE_SIGN);
-        commandTypeMap.put("buttonEquals", HandleOperator.EQUALS);
+        for (HandleOperator value : HandleOperator.values()) {
+            commandTypeMap.put(value.toString(), value);
+        }
 
-        commandTypeMap.put("buttonNine", SimpleOperand.NINE);
-        commandTypeMap.put("buttonEight", SimpleOperand.EIGHT);
-        commandTypeMap.put("buttonSeven", SimpleOperand.SEVEN);
-        commandTypeMap.put("buttonSix", SimpleOperand.SIX);
-        commandTypeMap.put("buttonFive", SimpleOperand.FIVE);
-        commandTypeMap.put("buttonFour", SimpleOperand.FOUR);
-        commandTypeMap.put("buttonThree", SimpleOperand.THREE);
-        commandTypeMap.put("buttonTwo", SimpleOperand.TWO);
-        commandTypeMap.put("buttonOne", SimpleOperand.ONE);
-        commandTypeMap.put("buttonZero", SimpleOperand.ZERO);
+        for (SimpleOperand value : SimpleOperand.values()) {
+            commandTypeMap.put(value.toString(), value);
+        }
 
-        commandTypeMap.put("buttonSum", Operator.ADDITION);
-        commandTypeMap.put("buttonSubtract", Operator.SUBTRACT);
-        commandTypeMap.put("buttonMultiply", Operator.MULTIPLY);
-        commandTypeMap.put("buttonDivide", Operator.DIVISION);
+        for (Operator value : Operator.values()) {
+            commandTypeMap.put(value.toString(), value);
+        }
     }
 
     @Override
@@ -60,10 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void button_OnClick(View view) {
         try {
-            String id = view.getResources().getResourceEntryName(view.getId());
             String text = ((Button)view).getText().toString();
-
-            CommandType commandType = this.commandTypeMap.get(id);
+            CommandType commandType = this.commandTypeMap.get(text);
             calculator.addCommand(commandType);
             this.errorText.setHint("");
         } catch (IllegalArgumentException error) {
