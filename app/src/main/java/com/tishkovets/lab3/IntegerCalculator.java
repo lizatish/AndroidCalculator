@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.tishkovets.lab3.commands.CommandType;
 import com.tishkovets.lab3.commands.FullOperand;
+import com.tishkovets.lab3.commands.HandleOperator;
 import com.tishkovets.lab3.commands.Operator;
 import com.tishkovets.lab3.commands.SimpleOperand;
 
@@ -19,13 +20,23 @@ public class IntegerCalculator {
     }
 
     public void addCommand(CommandType command) {
-        if (isLastOperator(command)) {
-            this.calculations.removeLast();
-            this.calculations.addLast(command);
-        } else if (isFirstNegativeNumber(command)) {
-            this.calculations.addLast(command);
-        } else if (isOperandOrNotFirstOperator(command)) {
-            this.calculations.addLast(command);
+        if (HandleOperator.DELETE.equals(command)) {
+            this.removeLastCommand();
+        } else if (HandleOperator.CHANGE_SIGN.equals(command)) {
+            this.changeSign();
+        } else if (HandleOperator.CLEAR.equals(command)) {
+            this.clearAll();
+        } else if (HandleOperator.EQUALS.equals(command)) {
+            this.calculate();
+        } else {
+            if (isLastOperator(command)) {
+                this.calculations.removeLast();
+                this.calculations.addLast(command);
+            } else if (isFirstNegativeNumber(command)) {
+                this.calculations.addLast(command);
+            } else if (isOperandOrNotFirstOperator(command)) {
+                this.calculations.addLast(command);
+            }
         }
     }
 
@@ -74,23 +85,26 @@ public class IntegerCalculator {
     }
 
     public void calculate() {
-        this.removeLastOperatorIfExists();
+        if(calculations.size() > 0) {
+            this.removeLastOperatorIfExists();
 
-        List<CommandType> tempList = this.convertSimpleOperandsToFullOperands();
+            List<CommandType> tempList = this.convertSimpleOperandsToFullOperands();
 
-        int weight = this.getMaxWeight(tempList);
-        while (weight != 0) {
-            int index = 0;
-            while (index <= tempList.size() - 1) {
-                if (this.executeActionsWithWeight(tempList, index, weight)) {
-                    index -= 1;
-                } else {
-                    index += 1;
+            int weight = this.getMaxWeight(tempList);
+            while (weight != 0) {
+                int index = 0;
+                while (index <= tempList.size() - 1) {
+                    if (this.executeActionsWithWeight(tempList, index, weight)) {
+                        index -= 1;
+                    } else {
+                        index += 1;
+                    }
+                    weight = this.getMaxWeight(tempList);
                 }
-                weight = this.getMaxWeight(tempList);
             }
+
+            this.updateStack(tempList.get(0));
         }
-        this.updateStack(tempList.get(0));
     }
 
     private void updateStack(CommandType answer) {

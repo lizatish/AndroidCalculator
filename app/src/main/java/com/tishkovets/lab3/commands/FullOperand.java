@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 public class FullOperand implements CommandType {
 
-    private int value;
+    private final int value;
     private final int weight = 0;
 
     public FullOperand(int value) {
